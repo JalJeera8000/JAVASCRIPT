@@ -1,4 +1,5 @@
-HTML
+###HTML###
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +35,7 @@ HTML
 
 
 
-JS
+###JS###
 
 
 function generateTable() {
