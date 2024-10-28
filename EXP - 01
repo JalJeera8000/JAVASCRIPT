@@ -1,4 +1,4 @@
-# HTML
+###HTML###
 
 
 <!DOCTYPE html>
@@ -50,7 +50,7 @@
 
 
 
-# JS 
+###JS### 
 
 
 function calculateTriangleArea() {
