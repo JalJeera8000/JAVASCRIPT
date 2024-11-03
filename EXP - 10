@@ -1,59 +1,79 @@
-###HTML###
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Browser and Screen Details</title>
-<script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Window and Document Properties</title>
 </head>
 <body>
-<h1>Browser and Screen Details</h1>
-<div>
-<p><strong>Browser Name:</strong> <span id="browserName"></span></p>
-<p><strong>Browser Version:</strong> <span id="browserVersion"></span></p>
-<p><strong>Screen Width:</strong> <span id="screenWidth"></span></p>
-<p><strong>Screen Height:</strong> <span id="screenHeight"></span></p>
-<p><strong>History Length (Stack):</strong> <span id="historyLength"></span></p>
-<p><strong>Number of Paragraph Tags:</strong> <span id="paraCount"></span></p>
-</div>
-<h2>Sample Text</h2>
-<p id="sampleText">This is some text to be replaced.</p>
-<input type="text" id="newText" placeholder="Enter new text">
-<button id="replaceTextButton">Replace Text</button>
+    <h1>JavaScript Window and Document Properties</h1>
+
+    <!-- Buttons for each function -->
+    <button onclick="showAlert()">Show Alert</button>
+    <button onclick="showConfirm()">Show Confirm</button>
+    <button onclick="showPrompt()">Show Prompt</button>
+    <button onclick="showLocation()">Show Location</button>
+    <button onclick="showNavigator()">Show Navigator Info</button>
+    <button onclick="redirect()">Redirect to Google</button>
+    <button onclick="changeBackground()">Change Background Color</button>
+    <button onclick="showScreenInfo()">Show Screen Info</button>
+    <button onclick="goBack()">Go Back in History</button>
+    
+
+    <script>
+        // Shows a simple alert dialog
+        function showAlert() {
+            alert("Hello! This is a simple alert box.");
+        }
+
+        // Displays a confirmation dialog
+        function showConfirm() {
+            let result = confirm("Do you confirm this action?");
+            alert("Confirmation result: " + result);
+        }
+
+        // Prompts user for text input
+        function showPrompt() {
+            let text = prompt("Please enter your name:");
+            if (text) {
+                alert("Hello, " + text);
+            } else {
+                alert("No name entered.");
+            }
+        }
+
+        // Shows the current URL location
+        function showLocation() {
+            alert("Current URL: " + window.location.href);
+        }
+
+        // Shows basic browser information
+        function showNavigator() {
+            alert("Browser Info: " + navigator.userAgent);
+        }
+
+        // Redirects to Google
+        function redirect() {
+            window.location.href = "https://www.google.com";
+        }
+
+        
+        // Changes background color
+        function changeBackground() {
+            document.body.style.backgroundColor = "lightblue";
+        }
+
+         // Shows screen information
+         function showScreenInfo() {
+            alert("Screen Width: " + screen.width + "\nScreen Height: " + screen.height);
+        }
+
+        // Navigates back one page in the browser history
+        function goBack() {
+            window.history.back();
+        }
+
+        
+    </script>
 </body>
 </html>
-
-
-
-
-###JS###
-
-
-
-const browserNameElement = document.getElementById('browserName');
-const browserVersionElement = document.getElementById('browserVersion');
-const userAgent = navigator.userAgent;
-const browserInfo = userAgent.match(/(firefox|msie|chrome|safari|opr|edg|brave)\/?\s*(\d+)/i) || [];
-
-const browserName = browserInfo[1];
-const browserVersion = browserInfo[2];
-
-browserNameElement.innerText = browserName ? browserName.charAt(0).toUpperCase() + browserName.slice(1) : "Unknown";
-browserVersionElement.innerText = browserVersion || "Unknown";
-
-document.getElementById('screenWidth').innerText = screen.width;
-document.getElementById('screenHeight').innerText = screen.height;
-document.getElementById('historyLength').innerText = history.length;
-
-const paraCount = document.getElementsByTagName('p').length;
-document.getElementById('paraCount').innerText = paraCount;
-
-document.getElementById('replaceTextButton').addEventListener('click', () => {
-    const newText = document.getElementById('newText').value;
-    const sampleTextElement = document.getElementById('sampleText');
-    sampleTextElement.innerText = newText || "The text has been replaced!";
-});
