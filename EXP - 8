@@ -1,58 +1,31 @@
-HTML 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            transition: background-color 0.5s;
-        }
-        .section {
-            padding: 20px;
-            margin: 10px;
-            border: 1px solid black;
-            outline: none; /* Remove outline for focused elements */
-        }
-    </style>
+    <title>Home Page with Event Background Change</title>
 </head>
-<body onmouseover="changeBgColor()">
-    <div class="section" tabindex="0" onfocus="changeFocus(1)">
-        <h1>Welcome to My Website</h1>
-        <p>This is the home section of my website.</p>
-    </div>
-    <div class="section" tabindex="0" onfocus="changeFocus(2)">
-        <h2>About Us</h2>
-        <p>Learn more about our mission and values.</p>
-    </div>
-    <div class="section" tabindex="0" onfocus="changeFocus(3)">
-        <h2>Contact</h2>
-        <p>Get in touch with us through this section.</p>
-    </div>
+<body>
+    <h1 id="title" onmouseenter="changeColorOfTitle()" onmouseleave="resetColor()">Welcome to the Home Page</h1>
+    
+    <label for="nameInput">Enter your name:</label>
+    <input type="text" id="nameInput" onfocus="changeColorOfPage()" onblur="resetColor()" placeholder="Focus to change color">
+    <br><br>
 
     <script>
-        function changeBgColor() {
-            document.body.style.backgroundColor = "lightblue";
+        // Change background color when the mouse enters the element
+        function changeColorOfTitle() {
+            document.body.style.backgroundColor = "gold";
         }
 
-        function changeFocus(sectionNumber) {
-            let sections = document.querySelectorAll('.section');
-            sections.forEach(section => {
-                section.style.backgroundColor = ''; // Reset background color
-            });
+        // Change background color on input focus
+        function changeColorOfPage() {
+            document.body.style.backgroundColor = "green";
+        }
 
-            const event = window.event; // Capture the event for the focused section
-            if (sectionNumber === 1) {
-                event.target.style.backgroundColor = "lightgreen"; // Home section
-            } else if (sectionNumber === 2) {
-                event.target.style.backgroundColor = "yellow"; // About Us section
-            } else if (sectionNumber === 3) {
-                event.target.style.backgroundColor = "pink"; // Contact section
-            }
+        // Reset background color when mouse leaves or focus is lost
+        function resetColor() {
+            document.body.style.backgroundColor = "white";
         }
     </script>
 </body>
