@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+</head>
+<body>
+    <h1>Array Operations</h1>
+
+    <label for="elementToAdd">Add Elements to Array</label>
+    <input type="text" id="elementToAdd" placeholder="Enter element to add">
+    <button onclick="addElement()">Add Element</button>
+    <br><br>
+
+    <label for="elementToRemove">Remove Specific Element</label>
+    <input type="text" id="elementToRemove" placeholder="Enter element to remove">
+    <button onclick="removeElement()">Remove Element</button>
+    <br><br>
+
+    <label for="elementToCheck">Check Element</label>
+    <input type="text" id="elementToCheck" placeholder="Enter element to check">
+    <button onclick="checkElement()">Check Element</button>
+    <br><br>
+
+    <label for="emptyArray">Empty the Array</label>
+    <button onclick="emptyArray()">Empty Array</button>
+    <br><br>
+
+    <label for="currentArray">Current Array:</label>
+    <pre id="A">[]</pre>
+    <br><br>
+
+    <script>
+        // Create an empty array
+        let myArray = [];
+
+        // Function to add an element to the array
+        function addElement() {
+            const element = document.getElementById("elementToAdd").value;
+            myArray.push(element);
+            displayArray();
+            document.getElementById("elementToAdd").value = ''; // Clear the input
+        }
+
+        // Function to remove a specific element from the array using filter()
+        function removeElement() {
+            const element = document.getElementById("elementToRemove").value;
+            myArray = myArray.filter(item => item !== element);
+            displayArray();
+            document.getElementById("elementToRemove").value = ''; // Clear the input
+        }
+
+        // Function to check if the array contains a specific element
+        function checkElement() {
+            const element = document.getElementById("elementToCheck").value;
+            if (myArray.includes(element)) {
+                alert(element + " is in the array.");
+            } else {
+                alert("Element Not Found!");
+            }
+            document.getElementById("elementToCheck").value = ''; // Clear the input
+        }
+
+        // Function to empty the array
+        function emptyArray() {
+            myArray = [];
+            displayArray();
+            alert("Array has been emptied.");
+        }
+
+        // Function to display the current array
+        function displayArray() {
+            document.getElementById("A").textContent = JSON.stringify(myArray, null, 2);
+        }
+    </script>
+</body>
+</html>
