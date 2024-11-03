@@ -1,95 +1,47 @@
-HTML
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Countdown Timer</title>
-    <script src="script.js"></script>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin-top: 50px;
-        }
-        .timer-box {
-            display: inline-block;
-            border: 1px solid #ccc;
-            padding: 20px;
-            margin: 20px;
-            background-color: #f9f9f9;
-        }
-        .timer-display {
-            font-size: 2em;
-            margin-top: 20px;
-        }
-    </style>
+    <title>Simple Countdown Timer</title>
 </head>
 <body>
-    <h1>Countdown Timer</h1>
-    <div class="timer-box">
-        <label for="expiryDate">Expiry Date (YYYY-MM-DD):</label>
-        <input type="date" id="expiryDate" required><br><br>
-        <label for="expiryTime">Expiry Time (HH:MM:SS):</label>
-        <input type="time" id="expiryTime" step="1" required><br><br>
-        <button onclick="startTimer()">Start Countdown</button>
-    </div>
-    <div class="timer-box">
-        <div id="currentTime"></div>
-        <div id="expiryTimeDisplay"></div>
-        <div class="timer-display" id="countdown"></div>
-        <div id="message"></div>
-    </div>
+    <h2>Countdown Timer</h2>
+    
+    <label for ="endTime">End Date & Time (YYYY-MM-DD HH:MM:SS):</label>
+    <input type="datetime-local" id="endTime" >
+    <button onclick="startCountdown()">Start Countdown</button>
+    
+    <h3>Time Remaining:</h3>
+    <p id="A">00 days 00:00:00</p>
+
+    <script>
+        let countdownInterval;
+
+        function startCountdown() {
+            const endTime = new Date(document.getElementById("endTime").value);
+            clearInterval(countdownInterval); // Clear any existing interval
+            
+            countdownInterval = setInterval(() => 
+            {
+                const now = new Date();
+                const timeLeft = endTime - now;
+
+                if (timeLeft <= 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById("A").innerText = "Countdown Timer Expired";
+                    return;
+                }
+
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+                document.getElementById("A").innerText = 
+                    days + " days " + hours + " hours " + minutes + " minutes " + seconds + " seconds";
+            }, 1000);
+        }
+    </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-JS
-
-
-function startTimer() {
-    const expiryDate = document.getElementById("expiryDate").value;
-    const expiryTime = document.getElementById("expiryTime").value;
-    
-    if (!expiryDate || !expiryTime) {
-        alert("Please enter both date and time for the timer.");
-        return;
-    }
-
-    const expiryDateTime = new Date(`${expiryDate}T${expiryTime}`);
-    document.getElementById("expiryTimeDisplay").textContent = `Expiry Time: ${expiryDateTime}`;
-
-    const timerInterval = setInterval(function () {
-        const currentTime = new Date();
-        document.getElementById("currentTime").textContent = `Current Time: ${currentTime}`;
-
-        const timeDifference = expiryDateTime - currentTime;
-
-        if (timeDifference <= 0) {
-            clearInterval(timerInterval);
-            document.getElementById("countdown").textContent = "00d 00h 00m 00s";
-            document.getElementById("message").textContent = "Countdown Timer Expired";
-        } else {
-            const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
-            document.getElementById("countdown").textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-        }
-    }, 1000);
-}
