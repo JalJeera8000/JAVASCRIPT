@@ -1,66 +1,55 @@
-HTML
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>String Comparison Methods</title>
-<script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Comparison </title>
 </head>
 <body>
-<h1>Compare Two Strings Using Different Methods</h1>
-<label for="string1">Enter First String: </label>
-<input type="text" id="string1">
-<br><br>
-<label for="string2">Enter Second String: </label>
-<input type="text" id="string2">
-<br><br>
-<button onclick="compareStrings()">Compare</button>
-<h2>Results:</h2>
-<div id="results">
-    <h3>Mathematical Operators (==)</h3>
-    <p id="math-operator-result"></p>
-    <h3>Strict Equality Operator (===)</h3>
-    <p id="strict-equality-result"></p>
-    <h3>Using match() Method</h3>
-    <p id="match-method-result"></p>
-    <h3>Using matchAll() Method</h3>
-    <p id="match-all-method-result"></p>
-    <h3>Using localeCompare() Method</h3>
-    <p id="locale-compare-result"></p>
-</div>
+
+    <h1>Compare Two Strings</h1>
+    <!-- Input fields for two strings -->
+    <label for="string1">Enter the first string:</label>
+    <input type="text" id="string1" placeholder="First string">
+    <br><br>
+    <label for="string2">Enter the second string:</label>
+    <input type="text" id="string2" placeholder="Second string">
+    <br><br>
+
+    <button onclick="compareStrings()">Compare Strings</button>
+    <p id="A"></p>
+
+    <script>
+        function compareStrings() {
+            // Get values from input fields
+            let str1 = document.getElementById("string1").value;
+            let str2 = document.getElementById("string2").value;
+            let result = "";
+
+            // Mathematical comparison
+            
+            result += `Mathematical Comparison: ${str1 === str2 ? "Matched" : "Unmatched"}<br>`; // 
+
+            // Strict equality comparison (checks type and value)
+            result += `Strict Equality Comparison: ${str1 === str2 ? "Matched" : "Unmatched"}<br>`;
+
+            // Using includes() method for substring match
+            result += `Match Method: ${str1.match(str2) ? "Matched" : "Unmatched"}<br>`;
+
+            // Using localeCompare() method for lexicographic comparison
+            result += `LocaleCompare Method: ${str1.localeCompare(str2) === 0 ? "Matched" : "Unmatched"}<br>`;
+
+
+            // Using matchAll() method for multiple substring matches
+            let matchAllResult = [...str1.matchAll(new RegExp(str2, 'g'))];
+            result += `MatchAll Method: ${matchAllResult.length > 0 ? "Matched" : "Unmatched"}<br>`;
+
+            
+
+            // Display result
+            document.getElementById("A").innerHTML = result;
+        }
+    </script>
+
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-JS
-
-
-function compareStrings() {
-    const str1 = document.getElementById("string1").value;
-    const str2 = document.getElementById("string2").value;
-
-    const mathOperatorResult = (str1 == str2) ? "Matched" : "Not Matched";
-    document.getElementById("math-operator-result").textContent = mathOperatorResult;
-
-    const strictEqualityResult = (str1 === str2) ? "Matched" : "Not Matched";
-    document.getElementById("strict-equality-result").textContent = strictEqualityResult;
-
-    const matchMethodResult = str1.match(str2) ? "Matched" : "Not Matched";
-    document.getElementById("match-method-result").textContent = matchMethodResult;
-
-    const matchAllMethodResult = [...str1.matchAll(new RegExp(str2, 'g'))].length > 0 ? "Matched" : "Not Matched";
-    document.getElementById("match-all-method-result").textContent = matchAllMethodResult;
-
-    const localeCompareResult = str1.localeCompare(str2) === 0 ? "Matched" : "Not Matched";
-    document.getElementById("locale-compare-result").textContent = localeCompareResult;
-}
