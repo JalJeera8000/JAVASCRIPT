@@ -1,65 +1,67 @@
-HTML
-
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Object and Array Manipulation</title>
-    <script src="script.js" defer></script>
+    <title>Append Object to Array and Check Array</title>
 </head>
 <body>
-    <h1>Object and Array Manipulation</h1>
-    <label for="fieldName">Field Name:</label>
-    <input type="text" id="fieldName" placeholder="Enter field name">
+
+    <h1>Object and Array Operations</h1>
+
+    <!-- Input fields for object properties -->
+    <label for="rollno">Roll No:</label>
+    <input type="text" id="rollno" placeholder="Enter Roll No">
     <br><br>
-    <label for="fieldValue">Field Value:</label>
-    <input type="text" id="fieldValue" placeholder="Enter field value">
+
+    <label for="name">Name:</label>
+    <input type="text" id="name" placeholder="Enter Name">
     <br><br>
-    <button onclick="addObject()">Add Object to Array</button>
+
+    <label for="college">College:</label>
+    <input type="text" id="college" placeholder="Enter College">
     <br><br>
-    <h3>Array:</h3>
-    <div id="arrayDisplay"></div>
-    <h3>Is it an Array?</h3>
-    <div id="arrayCheckResult"></div>
+
+    <button onclick="addObject()">Add Object</button>
+    <button onclick="checkArray()">Check if Array</button>
+
+    <h2>Array Content:</h2>
+    <pre id="A">[]</pre>
+
+    <h2>Check Result:</h2>
+    <p id="B"></p>
+
+    <script>
+        // Initialize an empty array
+        let myArray = [];
+
+        // Function to add an object to the array
+        function addObject() {
+            // Get values from input fields
+            const rollno = document.getElementById("rollno").value;
+            const name = document.getElementById("name").value;
+            const college = document.getElementById("college").value;
+
+            // Create an object
+            const studentObject = {
+                rollno: rollno,
+                name: name,
+                college: college
+            };
+
+            // Add the object to the array
+            myArray.push(studentObject);
+
+            // Display the updated array
+            document.getElementById("A").innerText = JSON.stringify(myArray, null, 2);
+        }
+
+        // Function to check if myArray is an array
+        function checkArray() {
+            const result = Array.isArray(myArray) ? "It's an array!" : "It's not an array.";
+            document.getElementById("B").innerText = result;
+        }
+    </script>
+
 </body>
 </html>
-
-
-
-
-
-
-JS
-
-
-let objectArray = [];
-
-function addObject() {
-    let fieldName = document.getElementById('fieldName').value;
-    let fieldValue = document.getElementById('fieldValue').value;
-    
-    // Create an object with the provided field name and value
-    let obj = {};
-    obj[fieldName] = fieldValue;
-
-    // Add the object to the array
-    objectArray.push(obj);
-
-    // Update the displayed array and check if it's an array
-    displayArray();
-    checkIfArray();
-}
-
-function displayArray() {
-    let display = document.getElementById('arrayDisplay');
-    display.innerHTML = JSON.stringify(objectArray, null, 2); // Pretty print the array
-}
-
-function checkIfArray() {
-    let result = document.getElementById('arrayCheckResult');
-    let isArray = Array.isArray(objectArray); // Check if objectArray is an array
-    result.innerHTML = `Is objectArray an array? ${isArray}`;
-}
