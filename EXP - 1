@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Area Calculator</title>
+</head>
+<body>
+
+    <h1>Simple Area Calculator</h1>
+
+    <!-- Triangle Input -->
+    <h2>Triangle</h2>
+    <label for="triangleBase">Base:</label>
+    <input type="number" id="triangleBase" placeholder="Enter base">
+    <br><br>
+    <label for="triangleHeight">Height:</label>
+    <input type="number" id="triangleHeight" placeholder="Enter height">
+    <br><br>
+
+    <button onclick="calculateTriangleArea()">Calculate Triangle Area</button>
+    <p id="A"></p>
+
+
+
+    <!-- Rectangle Input -->
+    <h2>Rectangle</h2>
+    <label for="rectangleLength">Length:</label>
+    <input type="number" id="rectangleLength" placeholder="Enter length">
+    <br><br>
+    <label for="rectangleWidth">Width:</label>
+    <input type="number" id="rectangleWidth" placeholder="Enter width">
+    <br><br>
+
+    <button onclick="calculateRectangleArea()">Calculate Rectangle Area</button>
+    <p id="B"></p>
+
+    
+    <!-- Circle Input -->
+    <h2>Circle</h2>
+    <label for="circleRadius">Radius:</label>
+    <input type="number" id="circleRadius" placeholder="Enter radius">
+    <br><br>
+
+    <button onclick="calculateCircleArea()">Calculate Circle Area</button>
+    <p id="C"></p>
+
+
+
+    <script>
+        // Function to calculate the area of a triangle
+        function calculateTriangleArea() {
+            let base = parseFloat(document.getElementById("triangleBase").value);
+            let height = parseFloat(document.getElementById("triangleHeight").value);
+            let area = 0.5 * base * height;
+            document.getElementById("A").innerText = "The area of the triangle is: " + area;
+        }
+
+        // Function to calculate the area of a rectangle
+        function calculateRectangleArea() {
+            let length = parseFloat(document.getElementById("rectangleLength").value);
+            let width = parseFloat(document.getElementById("rectangleWidth").value);
+            let area = length * width;
+            document.getElementById("B").innerText = "The area of the rectangle is: " + area;
+        }
+
+        // Function to calculate the area of a circle
+        function calculateCircleArea() {
+            let radius = parseFloat(document.getElementById("circleRadius").value);
+            let area = Math.PI * radius * radius;
+            document.getElementById("C").innerText = "The area of the circle is: " + area;
+        }
+    </script>
+
+</body>
+</html>
