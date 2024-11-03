@@ -1,41 +1,51 @@
-HTML
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Palindrome Checker</title>
-<script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple String Operations</title>
 </head>
 <body>
-<h1>Palindrome Checker</h1>
-<label for="inputString">Enter a string:</label>
-<input type="text" id="inputString" placeholder="Enter a string">
-<button onclick="checkPalindrome()">Check Palindrome</button>
-<h2>Result:</h2>
-<p id="result"></p>
+
+    <h1>String Operations</h1>
+    
+    <!-- Input for user string -->
+    <label for="inputString">Enter a string:</label>
+    <input type="text" id="inputString" placeholder="Type your string here">
+    <br><br>
+
+    <!-- Buttons for each operation and result areas below them -->
+    <button onclick="reverseString()">Reverse</button>
+    <p id="A"></p>
+    
+    <button onclick="replaceCharacters()">Replace 'a' with '*'</button>
+    <p id="B"></p>
+    
+    <button onclick="checkPalindrome()">Check Palindrome</button>
+    <p id="C"></p>
+
+    <script>
+        // Reverse the input string
+        function reverseString() {
+            let input = document.getElementById("inputString").value;
+            document.getElementById("A").innerText = "Reversed: " + input.split("").reverse().join("");
+        }
+
+        // Replace all 'a' characters with '*'
+        function replaceCharacters() {
+            let input = document.getElementById("inputString").value;
+            document.getElementById("B").innerText = "Replaced: " + input.replaceAll("a", "*");
+        }
+
+        // Check if the string is a palindrome
+        function checkPalindrome() {
+            let input = document.getElementById("inputString").value.toLowerCase().replace(/[^a-z0-9]/g, "")
+            document.getElementById("C").innerText = input === [...input].reverse().join("") 
+                ? "It's a palindrome!" 
+                : "Not a palindrome.";
+        }
+        
+    </script>
+    
 </body>
 </html>
-
-
-
-
-
-
-
-
-JS
-
-
-function checkPalindrome() {
-    const str = document.getElementById("inputString").value;
-    const cleanedString = str.toLowerCase().replace(/[^a-z0-9]/gi, '');
-    const reversedString = cleanedString.split('').reverse().join('');
-    if (cleanedString === reversedString) {
-        document.getElementById("result").innerText = `"${str}" is a palindrome.`;
-    } else {
-        document.getElementById("result").innerText = `"${str}" is not a palindrome.`;
-    }
-}
